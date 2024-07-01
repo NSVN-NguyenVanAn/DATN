@@ -17,7 +17,7 @@
    spring.datasource.username=ten_nguoi_dung
    spring.datasource.password=mat_khau
    
-2. **Tạo schema trong cơ sở dữ liệu  `mysql`**
+2. **Tạo schema trong hệ quản trị cơ sở dữ liệu của  `mysql`**
 
 3. Khởi chạy dự án
    ## Lưu Ý : sau khi tạo các user , cần gán các user role trong cơ sở dữ liệu tương ứng với : ROLE_ADMIN, ROLE_EDITOR,ROLE_USER.
