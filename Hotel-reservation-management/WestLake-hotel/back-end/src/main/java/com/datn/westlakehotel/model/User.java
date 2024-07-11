@@ -23,6 +23,9 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<BookedRoom> bookedRooms = new HashSet<>();
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {CascadeType.PERSIST,
                     CascadeType.MERGE, CascadeType.DETACH})
