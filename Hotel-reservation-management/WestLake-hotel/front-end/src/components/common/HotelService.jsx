@@ -32,7 +32,7 @@ const HotelService = () => {
                 <Card.Title className='hotel-color'>
                   <FaWifi /> WiFi
                 </Card.Title>
-                <Card.Text>Luôn kết nối với internet tốc độ cao.</Card.Text>
+                <Card.Text>Luôn kết nối với internet tốc độ cao</Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -42,7 +42,7 @@ const HotelService = () => {
                 <Card.Title className='hotel-color'>
                   <FaUtensils /> Bữa sáng
                 </Card.Title>
-                <Card.Text>Buffet bữa sáng đặc biệt thơm ngon.</Card.Text>
+                <Card.Text>Buffet bữa sáng đặc biệt thơm ngon</Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -52,7 +52,7 @@ const HotelService = () => {
                 <Card.Title className='hotel-color'>
                   <FaTshirt /> Giặt ủi
                 </Card.Title>
-                <Card.Text>Hãy để quần áo luôn sạch và thơm ngát .</Card.Text>
+                <Card.Text>Hãy để quần áo luôn sạch và thơm ngát </Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -64,7 +64,7 @@ const HotelService = () => {
                   Quầy Mini-bar
                 </Card.Title>
                 <Card.Text>
-                  Đồ uống và đồ ăn nhẹ ngay tại minibar trong phòng.
+                  Đồ uống và đồ ăn nhẹ ngay tại minibar trong phòng
                 </Card.Text>
               </Card.Body>
             </Card>
