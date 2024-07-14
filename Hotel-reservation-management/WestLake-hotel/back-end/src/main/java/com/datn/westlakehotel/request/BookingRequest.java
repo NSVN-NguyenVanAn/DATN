@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+/**
+ * @author Nguyen Van An
+ */
 @Data
 @NoArgsConstructor
 public class BookingRequest {

@@ -100,7 +100,7 @@ export async function bookRoom(booking) {
     if (error.response && error.response.data) {
       throw new Error(error.response.data);
     } else {
-      throw new Error(`Error booking room : ${error.message}`);
+      throw new Error(`Lỗi đặt phòng : ${error.message}`);
     }
   }
 }

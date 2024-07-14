@@ -79,14 +79,7 @@ function App() {
                 </RequireAuth>
               }
             />
-            <Route
-              path='/find-booking'
-              element={
-                <RequireAuth role='ROLE_ADMIN'>
-                  <FindBooking />
-                </RequireAuth>
-              }
-            />
+            <Route path='/find-booking' element={<FindBooking />} />
 
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Registration />} />
