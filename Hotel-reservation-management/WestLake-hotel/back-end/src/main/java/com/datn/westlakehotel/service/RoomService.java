@@ -26,9 +26,10 @@ import java.util.Optional;
 public class RoomService implements IRoomService {
     private final RoomRepository roomRepository;
     @Override
-    public Room addNewRoom(MultipartFile file, String roomType, BigDecimal roomPrice, String roomDes) throws SQLException, IOException {
+    public Room addNewRoom(MultipartFile file, String roomType, String roomNo, BigDecimal roomPrice, String roomDes) throws SQLException, IOException {
         Room room = new Room();
         room.setRoomType(roomType);
+        room.setRoomNo(roomNo);
         room.setRoomPrice(roomPrice);
         room.setRoomDes(roomDes);
         if (!file.isEmpty()){
@@ -71,19 +72,28 @@ public class RoomService implements IRoomService {
     }
 
     @Override
-    public Room updateRoom(Long roomId, String roomType, BigDecimal roomPrice, String roomDes, byte[] photoBytes) {
-        Room room = roomRepository.findById(roomId).get();
+    public Room updateRoom(Long roomId, String roomType, String roomNo, BigDecimal roomPrice, String roomDes, byte[] photoBytes) {
+        Room room = roomRepository.findById(roomId).orElseThrow(() -> new ResourceNotFoundException("Room not found"));
+
+        // Kiểm tra xem roomNo đã tồn tại trong cơ sở dữ liệu (trừ chính phòng hiện tại)
+        if (roomNo != null && !roomNo.equals(room.getRoomNo())) {
+            if (roomRepository.existsByRoomNo(roomNo)) {
+                throw new InternalServerException("Số phòng đã tồn tại");
+            }
+        }
+
         if (roomType != null) room.setRoomType(roomType);
+        if (roomNo != null) room.setRoomNo(roomNo);
         if (roomPrice != null) room.setRoomPrice(roomPrice);
         if (roomDes != null) room.setRoomDes(roomDes);
         if (photoBytes != null && photoBytes.length > 0) {
             try {
                 room.setPhoto(new SerialBlob(photoBytes));
             } catch (SQLException ex) {
-                throw new InternalServerException("Fail updating room");
+                throw new InternalServerException("Lỗi chỉnh sửa phòng");
             }
         }
-       return roomRepository.save(room);
+        return roomRepository.save(room);
     }
 
     @Override

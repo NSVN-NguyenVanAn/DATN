@@ -51,7 +51,8 @@ const BookingSummary = ({ booking, payment, isFormValid, onConfirm }) => {
         {payment > 0 ? (
           <>
             <p>
-              Tổng thanh toán: <strong>{payment} VND</strong>
+              Tổng thanh toán:{' '}
+              <strong>{payment.toLocaleString('vi-VN')} VND</strong>
             </p>
 
             {isFormValid ? (

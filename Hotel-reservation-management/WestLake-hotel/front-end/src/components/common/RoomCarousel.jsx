@@ -57,8 +57,11 @@ const RoomCarousel = () => {
                         <Card.Title className='hotel-color'>
                           {room.roomType}
                         </Card.Title>
+                        <Card.Title className='text-muted small'>
+                          Số phòng: {room.roomNo}
+                        </Card.Title>
                         <Card.Title className='room-price'>
-                          {room.roomPrice} VND/ngày
+                          {room.roomPrice.toLocaleString()} VND/ngày
                         </Card.Title>
                         <div className='flex-shrink-0'>
                           <Link

@@ -8,13 +8,13 @@ import { Link } from 'react-router-dom';
 
 const ExistingRooms = () => {
   const [rooms, setRooms] = useState([
-    { id: '', roomType: '', roomPrice: '', roomDes: '' },
+    { id: '', roomType: '', roomNo: '', roomPrice: '', roomDes: '' },
   ]);
   const [currentPage, setCurrentPage] = useState(1);
   const [roomsPerPage] = useState(8);
   const [isLoading, setIsLoading] = useState(false);
   const [filteredRooms, setFilteredRooms] = useState([
-    { id: '', roomType: '', roomPrice: '', roomDes: '' },
+    { id: '', roomType: '', roomNo: '', roomPrice: '', roomDes: '' },
   ]);
   const [selectedRoomType, setSelectedRoomType] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -118,6 +118,7 @@ const ExistingRooms = () => {
                 <tr className='text-center'>
                   <th>ID</th>
                   <th>Loại phòng</th>
+                  <th>Số phòng</th>
                   <th>Giá phòng</th>
                   <th>Hành động</th>
                 </tr>
@@ -128,6 +129,7 @@ const ExistingRooms = () => {
                   <tr key={room.id} className='text-center'>
                     <td>{room.id}</td>
                     <td>{room.roomType}</td>
+                    <td>{room.roomNo}</td>
                     <td>{room.roomPrice}</td>
                     <td className='gap-2'>
                       <Link to={`/edit-room/${room.id}`} className='gap-2'>

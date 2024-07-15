@@ -33,36 +33,36 @@ const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
       />
       <table className='table table-bordered table-hover shadow'>
         <thead>
-          <tr>
+          <tr className='text-center'>
             <th>STT</th>
-            <th>ID đặt phòng</th>
-            <th>ID phòng</th>
             <th>Loại phòng</th>
+            <th>Số phòng</th>
             <th>Ngày nhận</th>
             <th>Ngày trả</th>
             <th>Tên khách hàng</th>
             <th>Email khách hàng</th>
             <th>Người lớn</th>
             <th>Trẻ em</th>
-            <th>Tổng</th>
+            <th>Thanh toán</th>
             <th>Mã xác nhận</th>
           </tr>
         </thead>
         <tbody className='text-center'>
           {filteredBookings.map((booking, index) => (
             <tr key={booking.id}>
-              <td>{index + 1}</td>
-              <td>{booking.id}</td>
-              <td>{booking.room.id}</td>
-              <td>{booking.room.roomType}</td>
-              <td>{booking.checkInDate}</td>
-              <td>{booking.checkOutDate}</td>
-              <td>{booking.guestName}</td>
-              <td>{booking.guestEmail}</td>
-              <td>{booking.numOfAdults}</td>
-              <td>{booking.numOfChildren}</td>
-              <td>{booking.totalNumOfGuests}</td>
-              <td>{booking.bookingConfirmationCode}</td>
+              <td className='text-left'>{index + 1}</td>
+              <td className='text-left'>{booking.room.roomType}</td>
+              <td className='text-left'>{booking.room.roomNo}</td>
+              <td className='text-left'>{booking.checkInDate}</td>
+              <td className='text-left'>{booking.checkOutDate}</td>
+              <td className='text-left'>{booking.guestName}</td>
+              <td className='text-left'>{booking.guestEmail}</td>
+              <td className='text-left'>{booking.numOfAdults}</td>
+              <td className='text-left'>{booking.numOfChildren}</td>
+              <td className='text-left'>
+                {booking.price.toLocaleString('vi-VN')} VND
+              </td>
+              <td className='text-left'>{booking.bookingConfirmationCode}</td>
             </tr>
           ))}
         </tbody>

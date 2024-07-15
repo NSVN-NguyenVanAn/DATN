@@ -18,11 +18,10 @@ const RoomCard = ({ room }) => {
             </Link>
           </div>
           <div className='flex-grow-1 ml-3 px-5'>
-            <Card.Title className='hotel-color'>
-              Phòng {room.roomType}
-            </Card.Title>
+            <Card.Title className='hotel-color'>{room.roomType}</Card.Title>
+            <Card.Text>Số phòng: {room.roomNo}</Card.Text>
             <Card.Title className='room-price'>
-              {room.roomPrice} VND/ngày
+              {Number(room.roomPrice).toLocaleString('vi-VN')} VND/ngày
             </Card.Title>
             <Card.Text>{room.roomDes}</Card.Text>
           </div>

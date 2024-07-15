@@ -4,6 +4,7 @@ import com.datn.westlakehotel.model.BookedRoom;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -30,6 +31,7 @@ public class BookingRequest {
                 .checkInDate(request.checkInDate)
                 .checkOutDate(request.checkOutDate)
                 .totalNumOfGuest(request.numOfAdults + request.numOfChildren)
+                .price(BigDecimal.valueOf(request.price))
                 .build();
     }
 }

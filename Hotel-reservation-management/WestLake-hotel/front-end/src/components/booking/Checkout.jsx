@@ -19,6 +19,7 @@ const Checkout = () => {
   const [roomInfo, setRoomInfo] = useState({
     photo: '',
     roomType: '',
+    roomNo: '',
     roomPrice: '',
     roomDes: '',
   });
@@ -60,8 +61,12 @@ const Checkout = () => {
                       <td>{roomInfo.roomType}</td>
                     </tr>
                     <tr>
+                      <th>Số phòng:</th>
+                      <td>{roomInfo.roomNo}</td>
+                    </tr>
+                    <tr>
                       <th>Giá phòng/ngày:</th>
-                      <td>{roomInfo.roomPrice} VND</td>
+                      <td>{roomInfo.roomPrice.toLocaleString('vi-VN')} VND</td>
                     </tr>
                   </tbody>
                 </table>

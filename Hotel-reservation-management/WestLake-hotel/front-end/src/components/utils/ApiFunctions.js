@@ -14,10 +14,11 @@ export const getHeader = () => {
   };
 };
 
-export async function addRoom(photo, roomType, roomPrice, roomDes) {
+export async function addRoom(photo, roomType, roomNo, roomPrice, roomDes) {
   const formData = new FormData();
   formData.append('photo', photo);
   formData.append('roomType', roomType);
+  formData.append('roomNo', roomNo);
   formData.append('roomPrice', roomPrice);
   formData.append('roomDes', roomDes);
 
@@ -72,6 +73,7 @@ export async function deleteRoom(roomId) {
 export async function updateRoom(roomId, roomData) {
   const formData = new FormData();
   formData.append('roomType', roomData.roomType);
+  formData.append('roomNo', roomData.roomNo);
   formData.append('roomPrice', roomData.roomPrice);
   formData.append('roomDes', roomData.roomDes);
   formData.append('photo', roomData.photo);
@@ -126,7 +128,7 @@ export async function getBookingByConfirmationCode(confirmationCode) {
     if (error.response && error.response.data) {
       throw new Error(error.response.data);
     } else {
-      throw new Error(`Error find booking : ${error.message}`);
+      throw new Error(`Lỗi tìm thông tin đặt phòng : ${error.message}`);
     }
   }
 }
@@ -139,7 +141,7 @@ export async function cancelBooking(bookingId) {
     });
     return result.data;
   } catch (error) {
-    throw new Error(`Error cancelling booking :${error.message}`);
+    throw new Error(`Lỗi huỷ đặt phòng :${error.message}`);
   }
 }
 
@@ -161,7 +163,7 @@ export async function registerUser(registration) {
     if (error.reeponse && error.response.data) {
       throw new Error(error.response.data);
     } else {
-      throw new Error(`User registration error : ${error.message}`);
+      throw new Error(`Lỗi đăng ký tài khoản : ${error.message}`);
     }
   }
 }
@@ -226,6 +228,6 @@ export async function getBookingsByUserId(userId, token) {
     return response.data;
   } catch (error) {
     console.error('Error fetching bookings:', error.message);
-    throw new Error('Failed to fetch bookings');
+    throw new Error('Lỗi tải thông tin đặt phòng');
   }
 }

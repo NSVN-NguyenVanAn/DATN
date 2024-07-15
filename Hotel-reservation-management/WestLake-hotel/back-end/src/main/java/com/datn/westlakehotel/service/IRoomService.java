@@ -15,7 +15,7 @@ import java.util.Optional;
  */
 
 public interface IRoomService {
-    Room addNewRoom(MultipartFile photo, String roomType, BigDecimal roomPrice, String roomDes) throws SQLException, IOException;
+    Room addNewRoom(MultipartFile photo, String roomType, String roomNo, BigDecimal roomPrice, String roomDes) throws SQLException, IOException;
 
     List<String> getAllRoomTypes();
 
@@ -25,7 +25,7 @@ public interface IRoomService {
 
     void deleteRoom(Long roomId);
 
-    Room updateRoom(Long roomId, String roomType, BigDecimal roomPrice, String roomDes, byte[] photoBytes);
+    Room updateRoom(Long roomId, String roomType, String roomNo, BigDecimal roomPrice, String roomDes, byte[] photoBytes);
 
     Optional<Room> getRoomById(Long roomId);
 

@@ -3,6 +3,7 @@ package com.datn.westlakehotel.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -39,6 +40,8 @@ public class BookedRoom {
 
     @Column(name = "total_guest")
     private int totalNumOfGuest;
+    @Column(name = "price")
+    private BigDecimal price;
 
     @Column(name = "confirmation_Code")
     private String bookingConfirmationCode;

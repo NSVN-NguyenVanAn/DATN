@@ -123,8 +123,8 @@ const FindBooking = () => {
           <p className='text-success'>
             Mã xác nhận: {bookingInfo.bookingConfirmationCode}
           </p>
-          <p>Số phòng: {bookingInfo.room.id}</p>
           <p>Loại phòng: {bookingInfo.room.roomType}</p>
+          <p>Số phòng: {bookingInfo.room.id}</p>
           <p>
             Ngày nhận phòng:{' '}
             {moment(bookingInfo.checkInDate)
@@ -142,6 +142,7 @@ const FindBooking = () => {
           <p>Người lớn: {bookingInfo.numOfAdults}</p>
           <p>Trẻ em: {bookingInfo.numOfChildren}</p>
           <p>Tổng khách: {bookingInfo.totalNumOfGuests}</p>
+          <p>Thanh toán: {bookingInfo.price.toLocaleString('vi-VN')} VND</p>
 
           {!isDeleted && (
             <button

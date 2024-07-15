@@ -90,6 +90,7 @@ public class BookingController {
         RoomResponse room = new RoomResponse(
                 theRoom.getId(),
                 theRoom.getRoomType(),
+                theRoom.getRoomNo(),
                 theRoom.getRoomPrice(),
                 theRoom.getRoomDes());
         return new BookingResponse(
@@ -97,6 +98,6 @@ public class BookingController {
                 booking.getCheckOutDate(),booking.getGuestFullName(),
                 booking.getGuestEmail(), booking.getNumOfAdults(),
                 booking.getNumOfChildren(), booking.getTotalNumOfGuest(),
-                booking.getBookingConfirmationCode(), room);
+                booking.getPrice(), booking.getBookingConfirmationCode(), room);
     }
 }

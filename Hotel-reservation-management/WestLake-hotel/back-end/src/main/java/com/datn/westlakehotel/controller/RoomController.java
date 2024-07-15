@@ -43,10 +43,11 @@ public class RoomController {
     public ResponseEntity<RoomResponse> addNewRoom(
             @RequestParam("photo") MultipartFile photo,
             @RequestParam("roomType") String roomType,
+            @RequestParam("roomNo") String roomNo,
             @RequestParam("roomPrice") BigDecimal roomPrice,
             @RequestParam("roomDes") String roomDes) throws SQLException, IOException {
-        Room savedRoom = roomService.addNewRoom(photo, roomType, roomPrice, roomDes);
-        RoomResponse response = new RoomResponse(savedRoom.getId(), savedRoom.getRoomType(),
+        Room savedRoom = roomService.addNewRoom(photo, roomType, roomNo, roomPrice, roomDes);
+        RoomResponse response = new RoomResponse(savedRoom.getId(), savedRoom.getRoomType(), savedRoom.getRoomNo(),
                 savedRoom.getRoomPrice(), savedRoom.getRoomDes());
         return ResponseEntity.ok(response);
     }
@@ -82,13 +83,14 @@ public class RoomController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<RoomResponse> updateRoom(@PathVariable Long roomId,
                                                    @RequestParam(required = false)  String roomType,
+                                                   @RequestParam(required = false)  String roomNo,
                                                    @RequestParam(required = false) BigDecimal roomPrice,
                                                    @RequestParam(required = false)  String roomDes,
                                                    @RequestParam(required = false) MultipartFile photo) throws SQLException, IOException {
         byte[] photoBytes = photo != null && !photo.isEmpty() ?
                 photo.getBytes() : roomService.getRoomPhotoByRoomId(roomId);
         Blob photoBlob = photoBytes != null && photoBytes.length >0 ? new SerialBlob(photoBytes): null;
-        Room theRoom = roomService.updateRoom(roomId, roomType, roomPrice, roomDes, photoBytes);
+        Room theRoom = roomService.updateRoom(roomId, roomType, roomNo, roomPrice, roomDes, photoBytes);
         theRoom.setPhoto(photoBlob);
         RoomResponse roomResponse = getRoomResponse(theRoom);
         return ResponseEntity.ok(roomResponse);
@@ -146,7 +148,7 @@ public class RoomController {
             }
         }
         return new RoomResponse(room.getId(),
-                room.getRoomType(), room.getRoomPrice(), room.getRoomDes(),
+                room.getRoomType(), room.getRoomNo(), room.getRoomPrice(), room.getRoomDes(),
                 room.isBooked(), photoBytes, bookingInfo);
     }
 

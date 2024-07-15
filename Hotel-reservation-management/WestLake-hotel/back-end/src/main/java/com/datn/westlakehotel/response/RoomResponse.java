@@ -15,24 +15,28 @@ import java.util.List;
 @NoArgsConstructor
 public class RoomResponse {
     private Long id;
+
     private String roomType;
+    private String roomNo;
     private BigDecimal roomPrice;
     private String roomDes;
     private boolean isBooked;
     private String photo;
     private List<BookingResponse>bookings;
 
-    public RoomResponse(Long id, String roomType, BigDecimal roomPrice, String roomDes) {
+    public RoomResponse(Long id, String roomType, String roomNo, BigDecimal roomPrice, String roomDes) {
         this.id = id;
         this.roomType = roomType;
+        this.roomNo = roomNo;
         this.roomPrice = roomPrice;
         this.roomDes = roomDes;
     }
 
-    public RoomResponse(Long id, String roomType, BigDecimal roomPrice, String roomDes, boolean isBooked,
+    public RoomResponse(Long id, String roomType, String roomNo, BigDecimal roomPrice, String roomDes, boolean isBooked,
                         byte[] photoBytes , List<BookingResponse> bookings) {
         this.id = id;
         this.roomType = roomType;
+        this.roomNo = roomNo;
         this.roomPrice = roomPrice;
         this.roomDes = roomDes;
         this.isBooked = isBooked;

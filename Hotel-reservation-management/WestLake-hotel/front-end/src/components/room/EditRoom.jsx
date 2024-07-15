@@ -7,6 +7,7 @@ const EditRoom = () => {
   const [room, setRoom] = useState({
     photo: '',
     roomType: '',
+    roomNo: '',
     roomPrice: '',
     roomDes: '',
   });
@@ -107,33 +108,58 @@ const EditRoom = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className='mb-3'>
-              <label htmlFor='roomPrice' className='form-label hotel-color'>
-                Giá phòng
-              </label>
-              <input
-                required
-                type='number'
-                className='form-control'
-                id='roomPrice'
-                name='roomPrice'
-                value={room.roomPrice}
-                onChange={handleInputChange}
-              />
+
+            <div className='row'>
+              <div className='col-md-6 mb-3'>
+                <label htmlFor='roomNo' className='form-label hotel-color'>
+                  Số phòng
+                </label>
+                <input
+                  required
+                  type='number'
+                  className='form-control'
+                  id='roomNo'
+                  name='roomNo'
+                  value={room.roomNo}
+                  onChange={handleInputChange}
+                  min='1' // Đảm bảo giá trị không nhỏ hơn 1
+                />
+              </div>
+
+              <div className='col-md-6 mb-3'>
+                <label htmlFor='roomPrice' className='form-label hotel-color'>
+                  Giá phòng
+                </label>
+                <div className='input-group'>
+                  <input
+                    required
+                    type='number'
+                    className='form-control'
+                    id='roomPrice'
+                    name='roomPrice'
+                    value={room.roomPrice}
+                    onChange={handleInputChange}
+                    min='0' // Đảm bảo giá trị không nhỏ hơn 0
+                  />
+                  <span className='input-group-text'>VNĐ</span>
+                </div>
+              </div>
             </div>
+
             <div className='mb-3'>
               <label htmlFor='roomDes' className='form-label hotel-color'>
                 Mô tả
               </label>
-              <input
-                type='text'
+              <textarea
                 className='form-control'
                 id='roomDes'
                 name='roomDes'
                 value={room.roomDes}
                 onChange={handleInputChange}
+                rows='3'
               />
             </div>
+
             <div className='mb-3'>
               <label htmlFor='photo' className='form-label hotel-color'>
                 Ảnh phòng

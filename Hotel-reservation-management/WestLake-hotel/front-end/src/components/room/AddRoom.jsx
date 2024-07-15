@@ -7,6 +7,7 @@ const AddRoom = () => {
   const [newRoom, setNewRoom] = useState({
     photo: null,
     roomType: '',
+    roomNo: '',
     roomPrice: '',
     roomDes: '',
   });
@@ -40,12 +41,19 @@ const AddRoom = () => {
       const success = await addRoom(
         newRoom.photo,
         newRoom.roomType,
+        newRoom.roomNo,
         newRoom.roomPrice,
         newRoom.roomDes
       );
       if (success !== undefined) {
         setSuccessMessage('Thêm phòng mới thành công !');
-        setNewRoom({ photo: null, roomType: '', roomPrice: '', roomDes: '' });
+        setNewRoom({
+          photo: null,
+          roomType: '',
+          roomNo: '',
+          roomPrice: '',
+          roomDes: '',
+        });
         setImagePreview('');
         setErrorMessage('');
       } else {
@@ -82,7 +90,7 @@ const AddRoom = () => {
 
             <form onSubmit={handleSubmit}>
               <div className='mb-3'>
-                <label htmlFor='roomType' className='form-label'>
+                <label htmlFor='roomType' className='form-label hotel-color'>
                   Loại phòng
                 </label>
                 <div>
@@ -93,28 +101,47 @@ const AddRoom = () => {
                   />
                 </div>
               </div>
-              <div className='mb-3'>
-                <label htmlFor='roomPrice' className='form-label'>
-                  Giá phòng
-                </label>
-                <div className='input-group'>
+
+              <div className='row'>
+                <div className='col-md-6 mb-3'>
+                  <label htmlFor='roomNo' className='form-label hotel-color'>
+                    Số phòng
+                  </label>
                   <input
                     required
                     type='number'
                     className='form-control'
-                    id='roomPrice'
-                    name='roomPrice'
-                    value={newRoom.roomPrice}
+                    id='roomNo'
+                    name='roomNo'
+                    value={newRoom.roomNo}
                     onChange={handleRoomInputChange}
-                    min='0' // Đảm bảo giá trị không nhỏ hơn 0
+                    min='1' // Đảm bảo giá trị không nhỏ hơn 1
                   />
-                  <span className='input-group-text'>VNĐ</span>
+                </div>
+
+                <div className='col-md-6 mb-3'>
+                  <label htmlFor='roomPrice' className='form-label hotel-color'>
+                    Giá phòng
+                  </label>
+                  <div className='input-group'>
+                    <input
+                      required
+                      type='number'
+                      className='form-control'
+                      id='roomPrice'
+                      name='roomPrice'
+                      value={newRoom.roomPrice}
+                      onChange={handleRoomInputChange}
+                      min='0' // Đảm bảo giá trị không nhỏ hơn 0
+                    />
+                    <span className='input-group-text'>VNĐ</span>
+                  </div>
                 </div>
               </div>
 
               <div className='mb-3'>
-                <label htmlFor='roomDes' className='form-label'>
-                  Mô tả phòng
+                <label htmlFor='roomDes' className='form-label hotel-color '>
+                  Mô tả
                 </label>
                 <textarea
                   className='form-control'
@@ -127,7 +154,7 @@ const AddRoom = () => {
               </div>
 
               <div className='mb-3'>
-                <label htmlFor='photo' className='form-label'>
+                <label htmlFor='photo' className='form-label hotel-color'>
                   Ảnh phòng
                 </label>
                 <input
@@ -141,7 +168,7 @@ const AddRoom = () => {
                 {imagePreview && (
                   <img
                     src={imagePreview}
-                    alt='Preview  room photo'
+                    alt='Preview room photo'
                     style={{ maxWidth: '400px', maxHeight: '400px' }}
                     className='mb-3'
                   ></img>

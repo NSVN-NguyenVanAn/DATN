@@ -23,6 +23,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
     private String roomType;
+    private String roomNo;
     private BigDecimal roomPrice;
     private String roomDes;
     private boolean isBooked = false;

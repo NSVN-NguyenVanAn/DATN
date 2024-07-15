@@ -122,7 +122,7 @@ const RoomSearch = () => {
             onClearSearch={handleClearSearch}
           />
         ) : (
-          <p className='mt-4'>
+          <p className='mt-4 hotel-color'>
             Không có phòng nào có sẵn cho ngày và loại phòng đã chọn.
           </p>
         )}
