@@ -98,8 +98,6 @@ const BookingForm = () => {
       window.location.href = paymentLink;
     } catch (error) {
       const errorMessage = error.message;
-      console.log(errorMessage);
-      console.log('hi');
       navigate('/booking-success', { state: { error: errorMessage } });
     }
   };

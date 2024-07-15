@@ -1,11 +1,12 @@
 import { parseISO } from 'date-fns';
 import React, { useState, useEffect } from 'react';
 import DateSlider from '../common/DateSlider';
+import moment from 'moment';
 
 const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
   const [filteredBookings, setFilteredBookings] = useState(bookingInfo);
 
-  const filterBooknigs = (startDate, endDate) => {
+  const filterBookings = (startDate, endDate) => {
     let filtered = bookingInfo;
     if (startDate && endDate) {
       filtered = bookingInfo.filter((booking) => {
@@ -28,8 +29,8 @@ const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
   return (
     <section className='p-4'>
       <DateSlider
-        onDateChange={filterBooknigs}
-        onFilterChange={filterBooknigs}
+        onDateChange={filterBookings}
+        onFilterChange={filterBookings}
       />
       <table className='table table-bordered table-hover shadow'>
         <thead>
@@ -41,33 +42,29 @@ const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
             <th>Ngày trả</th>
             <th>Tên khách hàng</th>
             <th>Email khách hàng</th>
-            <th>Người lớn</th>
-            <th>Trẻ em</th>
+            <th>Số người</th>
             <th>Thanh toán</th>
             <th>Mã xác nhận</th>
           </tr>
         </thead>
-        <tbody className='text-center'>
+        <tbody className='text-left'>
           {filteredBookings.map((booking, index) => (
             <tr key={booking.id}>
-              <td className='text-left'>{index + 1}</td>
-              <td className='text-left'>{booking.room.roomType}</td>
-              <td className='text-left'>{booking.room.roomNo}</td>
-              <td className='text-left'>{booking.checkInDate}</td>
-              <td className='text-left'>{booking.checkOutDate}</td>
-              <td className='text-left'>{booking.guestName}</td>
-              <td className='text-left'>{booking.guestEmail}</td>
-              <td className='text-left'>{booking.numOfAdults}</td>
-              <td className='text-left'>{booking.numOfChildren}</td>
-              <td className='text-left'>
-                {booking.price.toLocaleString('vi-VN')} VND
-              </td>
-              <td className='text-left'>{booking.bookingConfirmationCode}</td>
+              <td>{index + 1}</td>
+              <td>{booking.room.roomType}</td>
+              <td>{booking.room.roomNo}</td>
+              <td>{moment(booking.checkInDate).format('DD/MM/YYYY')}</td>
+              <td>{moment(booking.checkOutDate).format('DD/MM/YYYY')}</td>
+              <td>{booking.guestName}</td>
+              <td>{booking.guestEmail}</td>
+              <td>{booking.totalNumOfGuests}</td>
+              <td>{booking.price.toLocaleString('vi-VN')} VND</td>
+              <td>{booking.bookingConfirmationCode}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      {filterBooknigs.length === 0 && (
+      {filteredBookings.length === 0 && (
         <p> Không có phòng nào được đặt trong khoảng thời gian vừa chọn</p>
       )}
     </section>

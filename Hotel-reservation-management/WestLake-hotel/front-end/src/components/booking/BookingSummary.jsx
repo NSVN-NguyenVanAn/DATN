@@ -30,11 +30,11 @@ const BookingSummary = ({ booking, payment, isFormValid, onConfirm }) => {
         </p>
         <p>
           Ngày nhận phòng:{' '}
-          <strong>{moment(booking.checkInDate).format('MMM Do YYYY')}</strong>
+          <strong>{moment(booking.checkInDate).format('DD/MM/YYYY')}</strong>
         </p>
         <p>
           Ngày trả phòng:{' '}
-          <strong>{moment(booking.checkOutDate).format('MMM Do YYYY')}</strong>
+          <strong>{moment(booking.checkOutDate).format('DD/MM/YYYY')}</strong>
         </p>
         <p>
           Số ngày đặt phòng: <strong>{numberOfDays}</strong>

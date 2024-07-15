@@ -16,15 +16,7 @@ const Profile = () => {
     roles: [{ id: '', name: '' }],
   });
 
-  const [bookings, setBookings] = useState([
-    {
-      id: '',
-      room: { id: '', roomType: '' },
-      checkInDate: '',
-      checkOutDate: '',
-      bookingConfirmationCode: '',
-    },
-  ]);
+  const [bookings, setBookings] = useState([]);
   const [message, setMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
@@ -43,7 +35,7 @@ const Profile = () => {
     };
 
     fetchUser();
-  }, [userId]);
+  }, [userId, token]);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -57,7 +49,7 @@ const Profile = () => {
     };
 
     fetchBookings();
-  }, [userId]);
+  }, [userId, token]);
 
   const handleDeleteAccount = async () => {
     const confirmed = window.confirm(
@@ -161,10 +153,11 @@ const Profile = () => {
                   <thead>
                     <tr>
                       <th scope='col'>ID đặt phòng</th>
-                      <th scope='col'>ID phòng</th>
                       <th scope='col'>Loại phòng</th>
+                      <th scope='col'>Số phòng</th>
                       <th scope='col'>Nhận phòng</th>
-                      <th scope='col'>Trả phòng Date</th>
+                      <th scope='col'>Trả phòng </th>
+                      <th scope='col'>Thanh toán</th>
                       <th scope='col'>Mã xác nhận</th>
                       <th scope='col'>Trạng thái</th>
                     </tr>
@@ -173,17 +166,19 @@ const Profile = () => {
                     {bookings.map((booking, index) => (
                       <tr key={index}>
                         <td>{booking.id}</td>
-                        <td>{booking.room.id}</td>
                         <td>{booking.room.roomType}</td>
+                        <td>{booking.room.roomNo}</td>
                         <td>
-                          {moment(booking.checkInDate)
-                            .subtract(1, 'month')
-                            .format('MMM Do, YYYY')}
+                          {moment(booking.checkInDate).format('DD/MM/YYYY')}
                         </td>
                         <td>
-                          {moment(booking.checkOutDate)
-                            .subtract(1, 'month')
-                            .format('MMM Do, YYYY')}
+                          {moment(booking.checkOutDate).format('DD/MM/YYYY')}
+                        </td>
+                        <td>
+                          {booking.price
+                            ? booking.price.toLocaleString('vi-VN')
+                            : 'N/A'}{' '}
+                          VND
                         </td>
                         <td>{booking.bookingConfirmationCode}</td>
                         <td className='text-success'>Đang tiến hành</td>

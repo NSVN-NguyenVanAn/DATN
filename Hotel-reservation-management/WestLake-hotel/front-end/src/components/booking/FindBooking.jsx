@@ -124,18 +124,18 @@ const FindBooking = () => {
             Mã xác nhận: {bookingInfo.bookingConfirmationCode}
           </p>
           <p>Loại phòng: {bookingInfo.room.roomType}</p>
-          <p>Số phòng: {bookingInfo.room.id}</p>
+          <p>Số phòng: {bookingInfo.room.roomNo}</p>
           <p>
             Ngày nhận phòng:{' '}
             {moment(bookingInfo.checkInDate)
               .subtract(1, 'month')
-              .format('MMM Do, YYYY')}
+              .format('DD/MM/YYYY')}
           </p>
           <p>
             Ngày trả phòng:{' '}
             {moment(bookingInfo.checkInDate)
               .subtract(1, 'month')
-              .format('MMM Do, YYYY')}
+              .format('DD/MM/YYYY')}
           </p>
           <p>Tên khách hàng: {bookingInfo.guestName}</p>
           <p>Địa chỉ email: {bookingInfo.guestEmail}</p>
