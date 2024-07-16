@@ -46,7 +46,6 @@ const FindBooking = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
-
     try {
       const data = await getBookingByConfirmationCode(confirmationCode);
       setBookingInfo(data);
@@ -59,7 +58,6 @@ const FindBooking = () => {
           : 'Không tìm thấy thông tin đặt phòng với mã xác nhận trên';
       setError(errorMessage);
     }
-
     setTimeout(() => setIsLoading(false), 1000);
   };
 
@@ -133,10 +131,11 @@ const FindBooking = () => {
           </p>
           <p>
             Ngày trả phòng:{' '}
-            {moment(bookingInfo.checkInDate)
+            {moment(bookingInfo.checkOutDate)
               .subtract(1, 'month')
               .format('DD/MM/YYYY')}
           </p>
+
           <p>Tên khách hàng: {bookingInfo.guestName}</p>
           <p>Địa chỉ email: {bookingInfo.guestEmail}</p>
           <p>Người lớn: {bookingInfo.numOfAdults}</p>

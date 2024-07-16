@@ -3,7 +3,11 @@ import moment from 'moment';
 import { useState } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import BookingSummary from './BookingSummary';
-import { bookRoom, getRoomById } from '../utils/ApiFunctions';
+import {
+  bookRoom,
+  getRoomById,
+  checkRoomAvailability,
+} from '../utils/ApiFunctions';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 
@@ -91,13 +95,30 @@ const BookingForm = () => {
   };
 
   const handleFormSubmit = async () => {
+    // Tính toán giá thanh toán
     booking.price = calculatePayment();
+
     try {
-      const paymentLink = await bookRoom(booking);
-      setIsSubmitted(true);
-      window.location.href = paymentLink;
+      // Kiểm tra tính khả dụng của phòng trước khi đặt phòng
+      const isAvailable = await checkRoomAvailability(
+        booking.roomId,
+        booking.checkInDate,
+        booking.checkOutDate
+      );
+
+      if (isAvailable) {
+        // Nếu phòng có sẵn, thực hiện đặt phòng
+        const paymentLink = await bookRoom(booking);
+        setIsSubmitted(true);
+        window.location.href = paymentLink;
+      } else {
+        // Nếu phòng không có sẵn, điều hướng đến trang lỗi với thông báo lỗi
+        navigate('/booking-success', {
+          state: { error: 'Phòng không có sẵn trong khoảng thời gian này' },
+        });
+      }
     } catch (error) {
-      const errorMessage = error.message;
+      const errorMessage = error.message || 'Đã xảy ra lỗi. Vui lòng thử lại.';
       navigate('/booking-success', { state: { error: errorMessage } });
     }
   };

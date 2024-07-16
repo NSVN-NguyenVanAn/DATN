@@ -152,6 +152,21 @@ public class RoomController {
                 room.isBooked(), photoBytes, bookingInfo);
     }
 
+    @PostMapping("/check-availability")
+    public ResponseEntity<String> checkRoomAvailability(
+            @RequestParam("roomId") Long roomId,
+            @RequestParam("checkInDate") LocalDate checkInDate,
+            @RequestParam("checkOutDate") LocalDate checkOutDate) {
+
+        boolean isAvailable = roomService.checkRoomAvailability(roomId, checkInDate, checkOutDate);
+
+        if (isAvailable) {
+            return ResponseEntity.ok("Phòng đang có sẵn.");
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Phòng đã được đặt trong khoảng thời gian này.");
+        }
+    }
+
     private List<BookedRoom> getAllBookingsByRoomId(Long roomId) {
         return bookingService.getAllBookingsByRoomId(roomId);
 

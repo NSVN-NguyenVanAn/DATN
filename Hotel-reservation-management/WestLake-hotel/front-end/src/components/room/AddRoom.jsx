@@ -57,7 +57,7 @@ const AddRoom = () => {
         setImagePreview('');
         setErrorMessage('');
       } else {
-        setErrorMessage('Error adding new room');
+        setErrorMessage('Lỗi thêm phòng mới');
       }
     } catch (error) {
       setErrorMessage(error.message);

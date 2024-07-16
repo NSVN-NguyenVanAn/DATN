@@ -3,6 +3,7 @@ package com.datn.westlakehotel.repository;
 import com.datn.westlakehotel.model.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,6 +26,16 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     List<Room> findAvailableRoomsByDatesAndType(LocalDate checkInDate, LocalDate checkOutDate, String roomType);
     boolean existsByRoomNo(String roomNo);
+
+    @Query(" SELECT COUNT(r) > 0 FROM Room r " +
+            " WHERE r.id = :roomId " +
+            " AND r.id IN (" +
+            "  SELECT br.room.id FROM BookedRoom br " +
+            "  WHERE ((br.checkInDate <= :checkOutDate) AND (br.checkOutDate >= :checkInDate))" +
+            ")")
+    boolean isRoomBooked(@Param("roomId") Long roomId,
+                         @Param("checkInDate") LocalDate checkInDate,
+                         @Param("checkOutDate") LocalDate checkOutDate);
 
 }
 

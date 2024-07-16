@@ -27,6 +27,11 @@ public class RoomService implements IRoomService {
     private final RoomRepository roomRepository;
     @Override
     public Room addNewRoom(MultipartFile file, String roomType, String roomNo, BigDecimal roomPrice, String roomDes) throws SQLException, IOException {
+        if (roomNo != null ) {
+            if (roomRepository.existsByRoomNo(roomNo)) {
+                throw new InternalServerException("Số phòng đã tồn tại");
+            }
+        }
         Room room = new Room();
         room.setRoomType(roomType);
         room.setRoomNo(roomNo);
@@ -105,4 +110,10 @@ public class RoomService implements IRoomService {
     public List<Room> getAvailableRooms(LocalDate checkInDate, LocalDate checkOutDate, String roomType) {
         return roomRepository.findAvailableRoomsByDatesAndType(checkInDate, checkOutDate, roomType);
     }
+
+    @Override
+    public boolean checkRoomAvailability(Long roomId, LocalDate checkInDate, LocalDate checkOutDate) {
+        return !roomRepository.isRoomBooked(roomId, checkInDate, checkOutDate); // Sử dụng phương thức từ RoomRepository
+    }
+
 }

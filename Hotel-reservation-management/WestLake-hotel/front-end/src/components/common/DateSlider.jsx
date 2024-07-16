@@ -34,7 +34,6 @@ const DateSlider = ({ onDateChange, onFilterChange }) => {
         ranges={[dateRange]}
         onChange={handleSelect}
         className='mb-4'
-        locale={vi} // Set the locale to Vietnamese
       />
       <button className='btn btn-secondary' onClick={handleClearFilter}>
         Xóa bộ lọc

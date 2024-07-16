@@ -231,3 +231,28 @@ export async function getBookingsByUserId(userId, token) {
     throw new Error('Lỗi tải thông tin đặt phòng');
   }
 }
+
+export const checkRoomAvailability = async (
+  roomId,
+  checkInDate,
+  checkOutDate
+) => {
+  try {
+    const response = await api.post('/rooms/check-availability', null, {
+      params: {
+        roomId,
+        checkInDate,
+        checkOutDate,
+      },
+    });
+
+    // Xử lý thông báo từ API
+    if (response.status === 200) {
+      return response.data === 'Phòng đang có sẵn.'; // Xác nhận phòng có sẵn
+    } else {
+      throw new Error(`Lỗi kiểm tra phòng: ${response.statusText}`);
+    }
+  } catch (error) {
+    throw new Error(`Phòng không có sẵn trong khoảng thời gian này`);
+  }
+};

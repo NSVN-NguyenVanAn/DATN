@@ -53,8 +53,17 @@ const BookingsTable = ({ bookingInfo, handleBookingCancellation }) => {
               <td>{index + 1}</td>
               <td>{booking.room.roomType}</td>
               <td>{booking.room.roomNo}</td>
-              <td>{moment(booking.checkInDate).format('DD/MM/YYYY')}</td>
-              <td>{moment(booking.checkOutDate).format('DD/MM/YYYY')}</td>
+              <td>
+                {moment(booking.checkInDate)
+                  .subtract(1, 'month')
+                  .format('DD/MM/YYYY')}
+              </td>
+              <td>
+                {moment(booking.checkOutDate)
+                  .subtract(1, 'month')
+                  .format('DD/MM/YYYY')}
+              </td>
+
               <td>{booking.guestName}</td>
               <td>{booking.guestEmail}</td>
               <td>{booking.totalNumOfGuests}</td>
